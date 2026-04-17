@@ -1,0 +1,25 @@
+{
+  "name": "fanqie-novel-cli",
+  "version": "1.0.0",
+  "description": "Fetch 番茄小说 (Fanqie Novel) rankings and book data via CLI",
+  "main": "novel_cli.js",
+  "bin": {
+    "fanqie": "novel_cli.js"
+  },
+  "scripts": {
+    "start": "node novel_cli.js",
+    "rankings": "node novel_cli.js rankings",
+    "rankings:male": "node novel_cli.js rankings --type=1",
+    "rankings:female": "node novel_cli.js rankings --type=2"
+  },
+  "keywords": [
+    "fanqie",
+    "novel",
+    "cli",
+    "book",
+    "reading"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {}
+}

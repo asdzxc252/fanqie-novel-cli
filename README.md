@@ -1,48 +1,60 @@
 # fanqie-novel-cli
 
-Fetch 番茄小说 (Fanqie Novel) bestseller rankings and book data from the command line.
+Fetch Chinese novel bestseller rankings from multiple platforms via CLI.
+
+## Supported Platforms
+
+| Platform | Source | Notes |
+|----------|--------|-------|
+| 番茄小说 (Fanqie) | API | ByteDance's novel platform |
+| 三九小说 (39xs) | HTML | Static novel site |
+
+> Note: Major platforms like 起点, 17K, 纵横 have strong anti-bot measures (WAF, JavaScript challenges). They cannot be scraped via simple HTTP requests.
 
 ## Install
 
 ```bash
 npm install -g fanqie-novel-cli
-# or
-npx fanqie-novel-cli rankings
-```
-
-Or download and run directly:
-
-```bash
-node novel_cli.js rankings
-```
-
-## Usage
-
-```bash
-# Show both male and female bestseller rankings
+# or run directly
 node novel_cli.js
-
-# Male bestseller (男频热销)
-node novel_cli.js rankings --type=1
-
-# Female bestseller (女频热销)
-node novel_cli.js rankings --type=2
-
-# Get book details by ID
-node novel_cli.js book 1630324483249155
-
-# Search books by keyword
-node novel_cli.js search 重生
+node rankings.js
 ```
 
-## Output Format
+## Commands
 
-All output is JSON to stdout. Progress messages go to stderr so you can pipe results:
+### `novel_cli.js` — Fanqie API data
 
 ```bash
-node novel_cli.js rankings --type=1 2>/dev/null | jq '.[].title'
+node novel_cli.js rankings --type=1   # 男频热销
+node novel_cli.js rankings --type=2   # 女频热销
+node novel_cli.js                    # Both rankings
+node novel_cli.js book <bookId>      # Book details
+node novel_cli.js search <keyword>   # Search
 ```
 
-## Credits
+### `rankings.js` — Unified multi-platform
 
-Data from [番茄小说](https://fanqienovel.com/) (ByteDance). MIT License.
+```bash
+node rankings.js fanqie --type=1      # 番茄男频
+node rankings.js fanqie --type=2      # 番茄女频
+node rankings.js 39xs                # 三九小说热门
+node rankings.js all                 # All platforms
+```
+
+### `report.js` — Markdown report
+
+```bash
+node report.js > ranking.md           # Generate markdown report
+```
+
+## Output
+
+All CLI tools output JSON to stdout, progress messages to stderr — safe to pipe:
+
+```bash
+node rankings.js fanqie --type=1 2>/dev/null | jq '.[].title'
+```
+
+## GitHub
+
+https://github.com/asdzxc252/fanqie-novel-cli

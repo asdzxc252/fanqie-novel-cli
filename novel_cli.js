@@ -58,7 +58,7 @@ async function getRankings(type = 1) {
     author: b.author,
     category: b.categoryName,
     synopsis: b.abstract,
-    cover: b.thumbUri ? `https://thumb1521.aiaibiben.com${b.thumbUri}` : null,
+    cover: b.thumbUri || null,
   }));
 }
 
@@ -75,7 +75,7 @@ async function getBookDetail(bookId) {
     author: book.author,
     category: book.categoryName,
     synopsis: book.abstract,
-    cover: book.thumbUri ? `https://thumb1521.aiaibiben.com${book.thumbUri}` : null,
+    cover: book.thumbUri || null,
     wordCount: book.wordCount,
     status: book.status,
   };
